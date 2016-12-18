@@ -1,8 +1,7 @@
-package main
+package gostemmer
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"os"
 	"reflect"
@@ -16,14 +15,8 @@ type Dict struct {
 }
 
 type Result struct {
-	count int
-	roots map[string]map[string]string
-}
-
-type Response struct {
-	Word  string                       `json:"word"`
-	Count int                          `json:"count"`
-	Roots map[string]map[string]string `json:"roots"`
+	Count int
+	Roots map[string]map[string]string
 }
 
 type Affix struct {
@@ -220,8 +213,8 @@ func stem(query string, options map[string]bool, affixes []Affix,
 	for key, word := range words {
 		stemmed := stemWord(key, options, affixes, prefixes, disallowed_confixes, allomorphs, dicts)
 		final_result[key] = new(Result)
-		final_result[key].count = word["count"]
-		final_result[key].roots = stemmed
+		final_result[key].Count = word["count"]
+		final_result[key].Roots = stemmed
 
 		if len(stemmed) == 0 && options["NO_NO_MATCH"] {
 			delete(final_result, key)
@@ -231,17 +224,9 @@ func stem(query string, options map[string]bool, affixes []Affix,
 	return final_result
 }
 
-func main() {
-	if len(os.Args) == 1 {
-		fmt.Println("Tolong masukkan satu kata dalam Bahasa Indonesia!")
-		fmt.Println("e.g: $ go run stemmer.go <kata>")
-		os.Exit(0)
-	}
-
-	word := os.Args[1]
-
+func StemWord(word string, kamus string) map[string]*Result {
 	// Set Kamus
-	dictionary, err := os.Open("kamus.txt")
+	dictionary, err := os.Open(kamus)
 	if err != nil {
 		fmt.Println("Kamus tidak ditemukan!")
 		os.Exit(0)
@@ -347,16 +332,5 @@ func main() {
 	}
 
 	rooted := stem(word, options, affixes, prefixes, disallowed_confixes, allomorphs, dicts)
-
-	for key, value := range rooted {
-		temp := &Response{
-			Word:  key,
-			Count: value.count,
-			Roots: value.roots,
-		}
-
-		resp, _ := json.Marshal(temp)
-		fmt.Println(string(resp))
-	}
-
+	return rooted
 }

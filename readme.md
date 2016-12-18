@@ -1,17 +1,15 @@
 # Go Stemmer
 
 Go Stemmer adalah pencari akar kata bahasa Indonesia.
-Go Stemmer merupakan hasil porting ke bahasa pemrograman Go dari [Pengakar](https://github.com/ivanlanin/pengakar) yang sudah dibuat oleh [Ivan Lanin](https://github.com/ivanlanin) dengan menggunakan bahasa pemrograman PHP.
+
+Go Stemmer merupakan hasil porting ke bahasa pemrograman Go dari [Pengakar](https://github.com/ivanlanin/pengakar) yang sudah dibuat oleh [Ivan Lanin](https://github.com/ivanlanin) dengan menggunakan bahasa pemrograman PHP. 
+
+Sebelumnya repository ini bernama [go-stemmer](https://github.com/linxlunx/go-stemmer), lalu diubah menjadi [gostemmer](https://github.com/linxlunx/gostemmer) setelah dilakukan penyesuaian di beberapa hal, sehingga dapat digunakan sebagai package.
 
 ## Penggunaan
-Bisa dikompilasi terlebih dahulu.
+Download terlebih dahulu packagenya.
 ```
-$ go build
-$ ./go-stemmer melihat
-{"word":"melihat","count":1,"roots":{"lihat":{"affixes":"me-","class":"v","lemma":"lihat","prefixes":"me-"}}}
+$ go get github.com/linxlunx/gostemmer
 ```
-Atau bisa langsung dijalankan.
-```
-$ go run stemmer.go melihat
-{"word":"melihat","count":1,"roots":{"lihat":{"affixes":"me-","class":"v","lemma":"lihat","prefixes":"me-"}}}
-```
+Penggunaan dapat dilihat pada direktori example.
+
