@@ -228,7 +228,7 @@ func StemWord(word string, kamus string) map[string]*Result {
 	// Set Kamus
 	dictionary, err := os.Open(kamus)
 	if err != nil {
-		fmt.Println("Kamus tidak ditemukan!")
+		fmt.Println("Kamus tidak ditemukan! Harap dicek kembali lokasi file kamus yang digunakan.")
 		os.Exit(0)
 	}
 	defer dictionary.Close()
