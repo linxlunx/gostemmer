@@ -11,5 +11,5 @@ Download terlebih dahulu packagenya.
 ```
 $ go get github.com/linxlunx/gostemmer
 ```
-Penggunaan dapat dilihat pada direktori example.
+Penggunaan dapat dilihat pada direktori example. Jangan lupa untuk konfigurasi lokasi kamus terlebih dahulu.
 
